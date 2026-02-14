@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Minds | Media Consultancy</title>
+    <meta name="description" content="Stream Minds - Strategic media consultancy helping brands amplify their voice">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap');
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2a2a2a;
+            --light-gray: #888888;
+            --white: #ffffff;
+            --off-white: #e0e0e0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--light-gray);
+            text-transform: uppercase;
+        }
+
+        .nav-cta {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            padding: 0.6rem 1.8rem;
+            border: 1px solid var(--medium-gray);
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-cta:hover {
+            border-color: var(--white);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            background:
+                linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.8) 55%, var(--black) 100%),
+                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 8vw, 5.5rem);
+            font-weight: 900;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 300;
+            color: var(--off-white);
+            letter-spacing: 4px;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .scroll-btn {
+            display: inline-block;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.8rem 2.5rem;
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: all 0.4s;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* ===== SECTION COMMON ===== */
+        section { padding: 7rem 5%; }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--medium-gray);
+            margin: 0 auto 3rem;
+        }
+
+        /* ===== WHY CONSULTING ===== */
+        .why {
+            background: var(--dark);
+        }
+
+        .why-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .why-text h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .why-text p {
+            font-size: 1.05rem;
+            color: var(--off-white);
+            font-weight: 300;
+            line-height: 2;
+            margin-bottom: 1.2rem;
+        }
+
+        .why-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: var(--dark-gray);
+            border: 1px solid var(--medium-gray);
+            padding: 1.5rem;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+
+        .stat-box:hover {
+            border-color: var(--light-gray);
+        }
+
+        .stat-box .num {
+            font-size: 2rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-box .label {
+            font-size: 0.8rem;
+            color: var(--light-gray);
+            font-weight: 300;
+        }
+
+        .why-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .why-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) brightness(0.9);
+            transition: transform 0.5s, filter 0.5s;
+        }
+
+        .why-image:hover img {
+            transform: scale(1.03);
+            filter: grayscale(0%) brightness(1);
+        }
+
+        /* ===== ABOUT COMPANY ===== */
+        .about {
+            background: var(--black);
+            text-align: center;
+        }
+
+        .about-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .about p {
+            font-size: 1.05rem;
+            color: var(--off-white);
+            font-weight: 300;
+            line-height: 2;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .about-img {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/2;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) brightness(0.9);
+            transition: transform 0.5s, filter 0.5s;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .about-img .overlay-text {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact {
+            background: var(--dark);
+            text-align: center;
+        }
+
+        .contact-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            color: var(--light-gray);
+            font-size: 1.05rem;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+
+        .email-link {
+            display: inline-block;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding: 1rem 3rem;
+            border: 1px solid var(--white);
+            transition: all 0.4s ease;
+        }
+
+        .email-link:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--medium-gray);
+            background: var(--black);
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: var(--light-gray);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 768px) {
+            .why-inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .why-image { order: -1; }
+
+            .about-images {
+                grid-template-columns: 1fr;
+            }
+
+            section { padding: 5rem 6%; }
+
+            .nav-cta { display: none; }
+        }
+
+        /* ===== FADE-IN ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="logo">
+            STREAM MINDS
+            <span>Media Consultancy</span>
+        </div>
+        <a href="#contact" class="nav-cta">Get in Touch</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <h1>Stream Minds</h1>
+            <p class="tagline">Media Consultancy with a Different Perspective</p>
+            <a href="#why" class="scroll-btn">Discover More</a>
+        </div>
+    </section>
+
+    <!-- WHY CONSULTING -->
+    <section class="why" id="why">
+        <div class="why-inner">
+            <div class="why-text fade-in">
+                <p class="section-label">Why Media Consulting?</p>
+                <h2>Your message deserves to be heard the right way</h2>
+                <p>
+                    In a world overloaded with noise, the brands that succeed are the ones that know how to cut through the clutter. Media consulting gives you a clear roadmap — from shaping your media identity to managing your reputation and turning audiences into loyal clients.
+                </p>
+                <p>
+                    Without a solid media strategy, even the best products and services get lost in the crowd.
+                </p>
+                <div class="why-stats">
+                    <div class="stat-box">
+                        <span class="num">72%</span>
+                        <span class="label">of consumers trust brands with strong media presence</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="num">3x</span>
+                        <span class="label">faster growth for companies with media strategy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="why-image fade-in">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+                     alt="Server room with blue lights" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT COMPANY -->
+    <section class="about" id="about">
+        <div class="about-inner fade-in">
+            <p class="section-label">Who We Are</p>
+            <div class="divider"></div>
+            <h2>Stream Minds — Your Strategic Media Partner</h2>
+            <p>
+                We are a specialized media consultancy helping organizations and brands build a powerful, lasting media presence. We craft strategies, develop content, and bridge the gap between you and your target audience.
+            </p>
+            <p>
+                Every brand has a story worth telling — our mission is to help you tell it in the most impactful way possible.
+            </p>
+        </div>
+        <div class="about-images fade-in" style="max-width:1100px; margin:3rem auto 0;">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80"
+                     alt="Digital network visualization" loading="lazy">
+                <div class="overlay-text">Strategic Planning</div>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80"
+                     alt="Digital data streams on screens" loading="lazy">
+                <div class="overlay-text">Content Production</div>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?w=600&q=80"
+                     alt="Galaxy and stars in deep space" loading="lazy">
+                <div class="overlay-text">Impact Analysis</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="contact-inner fade-in">
+            <p class="section-label">Get in Touch</p>
+            <div class="divider"></div>
+            <h2>Ready to Start?</h2>
+            <p>To work with us, reach out via email</p>
+            <a href="mailto:koweiti@gmail.com" class="email-link">koweiti@gmail.com</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Stream Minds. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Fade-in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
