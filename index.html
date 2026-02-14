@@ -540,17 +540,121 @@
 
             .value-items {
                 grid-template-columns: 1fr 1fr;
-                gap: 2rem;
+                gap: 1.5rem;
             }
         }
 
         @media (max-width: 768px) {
+            .hero {
+                min-height: 40vh;
+                padding: 6rem 6% 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
+
+            .hero .subtitle {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+                margin-bottom: 1rem;
+            }
+
+            .hero .hero-desc {
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.7;
+            }
+
+            .scroll-btn {
+                font-size: 0.75rem;
+                padding: 0.6rem 1.8rem;
+            }
+
             .about-inner {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
+                gap: 2rem;
             }
 
             .about-image { order: -1; }
+
+            .about-text h2,
+            .services-header h2,
+            .why-header h2,
+            .value h2,
+            .contact h2 {
+                font-size: 1.3rem;
+            }
+
+            .about-text p,
+            .why-header p,
+            .contact p {
+                font-size: 0.9rem;
+            }
+
+            .section-label {
+                font-size: 0.6rem;
+                letter-spacing: 3px;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .service-card h3 {
+                font-size: 0.9rem;
+            }
+
+            .service-card p {
+                font-size: 0.82rem;
+            }
+
+            .why-card {
+                padding: 1.5rem;
+            }
+
+            .why-card h3 {
+                font-size: 0.92rem;
+            }
+
+            .why-card p {
+                font-size: 0.82rem;
+            }
+
+            .why-card:last-child {
+                grid-column: auto;
+                max-width: 100% !important;
+            }
+
+            .value-items {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.2rem;
+            }
+
+            .value-item h4 {
+                font-size: 0.75rem;
+            }
+
+            .value-item .icon-circle {
+                width: 55px;
+                height: 55px;
+            }
+
+            .value-item svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .value-statement {
+                font-size: 0.88rem;
+                margin-top: 2.5rem;
+            }
+
+            .email-link {
+                font-size: 0.95rem;
+                padding: 0.8rem 2rem;
+            }
 
             .nav-links {
                 position: fixed;
@@ -570,11 +674,38 @@
             .nav-links a { font-size: 1rem; }
             .menu-toggle { display: block; }
 
-            section { padding: 5rem 6%; }
+            section { padding: 4rem 6%; }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .logo span {
+                font-size: 0.45rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.6rem;
+                letter-spacing: 2px;
+            }
+
+            .hero .subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 1.5px;
+            }
+
+            .hero .hero-desc {
+                font-size: 0.78rem;
+            }
 
             .value-items {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
             }
+
+            section { padding: 3rem 5%; }
         }
 
         /* ===== FADE-IN ===== */
