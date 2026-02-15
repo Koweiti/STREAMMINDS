@@ -126,9 +126,24 @@
             text-align: center;
             padding: 0 5%;
             position: relative;
-            background:
-                linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0.75) 50%, var(--black) 100%),
-                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center/cover no-repeat;
+            overflow: hidden;
+            background: var(--black);
+        }
+
+        .hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.5) 60%, var(--black) 100%);
+            z-index: 1;
         }
 
         .hero-content {
@@ -283,22 +298,9 @@
         .service-card {
             background: var(--dark);
             border: 1px solid var(--medium-gray);
-            padding: 2.2rem;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--light-gray), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
         }
 
         .service-card:hover {
@@ -306,12 +308,41 @@
             transform: translateY(-3px);
         }
 
-        .service-card:hover::before { opacity: 1; }
+        .service-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .service-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .service-card:hover .service-img-wrap img {
+            transform: scale(1.08);
+            filter: brightness(0.85);
+        }
+
+        .service-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--dark) 0%, transparent 60%);
+        }
+
+        .service-body {
+            padding: 1.8rem 2rem 2rem;
+            position: relative;
+        }
 
         .service-icon {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 1.5rem;
+            width: 36px;
+            height: 36px;
+            margin-bottom: 1.2rem;
             stroke: var(--light-gray);
             transition: stroke 0.3s;
         }
@@ -598,8 +629,12 @@
                 letter-spacing: 3px;
             }
 
-            .service-card {
-                padding: 1.5rem;
+            .service-img-wrap {
+                height: 140px;
+            }
+
+            .service-body {
+                padding: 1.2rem 1.5rem 1.5rem;
             }
 
             .service-card h3 {
@@ -744,6 +779,8 @@
 
     <!-- HERO -->
     <section class="hero">
+        <canvas class="hero-canvas" id="heroCanvas"></canvas>
+        <div class="hero-overlay"></div>
         <div class="hero-content fade-in">
             <h1>Stream Minds</h1>
             <p class="subtitle">Media Consulting & Strategic Advisory</p>
@@ -783,46 +820,82 @@
         </div>
         <div class="services-grid fade-in">
             <div class="service-card">
-                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                </svg>
-                <h3>Comprehensive Media Strategy Development</h3>
-                <p>End-to-end media strategies aligned with institutional objectives and long-term vision.</p>
+                <div class="service-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&q=80" alt="Media Strategy" loading="lazy">
+                    <div class="service-img-overlay"></div>
+                </div>
+                <div class="service-body">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                    <h3>Comprehensive Media Strategy Development</h3>
+                    <p>End-to-end media strategies aligned with institutional objectives and long-term vision.</p>
+                </div>
             </div>
             <div class="service-card">
-                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-                </svg>
-                <h3>Media Oversight & Platform Supervision</h3>
-                <p>Monitoring and governing media channels to ensure consistency, quality, and strategic alignment.</p>
+                <div class="service-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&q=80" alt="Media Oversight" loading="lazy">
+                    <div class="service-img-overlay"></div>
+                </div>
+                <div class="service-body">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <h3>Media Oversight & Platform Supervision</h3>
+                    <p>Monitoring and governing media channels to ensure consistency, quality, and strategic alignment.</p>
+                </div>
             </div>
             <div class="service-card">
-                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                </svg>
-                <h3>Corporate Reputation Management</h3>
-                <p>Building, safeguarding, and strengthening institutional reputation through analytical advisory.</p>
+                <div class="service-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=600&q=80" alt="Reputation Management" loading="lazy">
+                    <div class="service-img-overlay"></div>
+                </div>
+                <div class="service-body">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <h3>Corporate Reputation Management</h3>
+                    <p>Building, safeguarding, and strengthening institutional reputation through analytical advisory.</p>
+                </div>
             </div>
             <div class="service-card">
-                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                </svg>
-                <h3>Media Crisis Management & Advisory</h3>
-                <p>Structured crisis response frameworks that protect credibility and minimize reputational exposure.</p>
+                <div class="service-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&q=80" alt="Crisis Management" loading="lazy">
+                    <div class="service-img-overlay"></div>
+                </div>
+                <div class="service-body">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                    <h3>Media Crisis Management & Advisory</h3>
+                    <p>Structured crisis response frameworks that protect credibility and minimize reputational exposure.</p>
+                </div>
             </div>
             <div class="service-card">
-                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                </svg>
-                <h3>Strategic Campaign Planning & Supervision</h3>
-                <p>Designing and overseeing high-impact media campaigns with measurable outcomes.</p>
+                <div class="service-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?w=600&q=80" alt="Campaign Planning" loading="lazy">
+                    <div class="service-img-overlay"></div>
+                </div>
+                <div class="service-body">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <h3>Strategic Campaign Planning & Supervision</h3>
+                    <p>Designing and overseeing high-impact media campaigns with measurable outcomes.</p>
+                </div>
             </div>
             <div class="service-card">
-                <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                <h3>Executive Media Training & Spokesperson Advisory</h3>
-                <p>Preparing leaders for media engagements with confidence, clarity, and institutional alignment.</p>
+                <div class="service-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1596276020587-8044fe049813?w=600&q=80" alt="Media Training" loading="lazy">
+                    <div class="service-img-overlay"></div>
+                </div>
+                <div class="service-body">
+                    <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <h3>Executive Media Training & Spokesperson Advisory</h3>
+                    <p>Preparing leaders for media engagements with confidence, clarity, and institutional alignment.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -949,6 +1022,106 @@
         }, { threshold: 0.12 });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Hero Canvas Particle Animation
+        (function() {
+            const canvas = document.getElementById('heroCanvas');
+            const ctx = canvas.getContext('2d');
+            let w, h, particles, connections;
+            const PARTICLE_COUNT = 80;
+            const CONNECTION_DIST = 150;
+            const MOUSE_RADIUS = 200;
+            let mouse = { x: -1000, y: -1000 };
+
+            function resize() {
+                const hero = canvas.parentElement;
+                w = canvas.width = hero.offsetWidth;
+                h = canvas.height = hero.offsetHeight;
+            }
+
+            function createParticles() {
+                particles = [];
+                for (let i = 0; i < PARTICLE_COUNT; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        vx: (Math.random() - 0.5) * 0.6,
+                        vy: (Math.random() - 0.5) * 0.6,
+                        r: Math.random() * 2 + 0.5,
+                        opacity: Math.random() * 0.5 + 0.2
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+
+                // Update & draw particles
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Bounce off edges
+                    if (p.x < 0 || p.x > w) p.vx *= -1;
+                    if (p.y < 0 || p.y > h) p.vy *= -1;
+
+                    // Slight mouse attraction
+                    const dx = mouse.x - p.x;
+                    const dy = mouse.y - p.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < MOUSE_RADIUS) {
+                        p.vx += dx * 0.00005;
+                        p.vy += dy * 0.00005;
+                    }
+
+                    // Draw particle
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(180, 180, 200, ${p.opacity})`;
+                    ctx.fill();
+
+                    // Draw connections
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const cdx = p.x - p2.x;
+                        const cdy = p.y - p2.y;
+                        const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+                        if (cdist < CONNECTION_DIST) {
+                            const alpha = (1 - cdist / CONNECTION_DIST) * 0.15;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(150, 150, 180, ${alpha})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            canvas.parentElement.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            canvas.parentElement.addEventListener('mouseleave', () => {
+                mouse.x = -1000;
+                mouse.y = -1000;
+            });
+
+            window.addEventListener('resize', () => {
+                resize();
+                createParticles();
+            });
+
+            resize();
+            createParticles();
+            animate();
+        })();
     </script>
 </body>
 </html>
